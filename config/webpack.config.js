@@ -64,6 +64,9 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
+const lessRegex = /\.less$/;
+const lessModuleRegex = /\.module\.less$/;
+
 const hasJsxRuntime = (() => {
   if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true') {
     return false;
@@ -357,15 +360,19 @@ module.exports = function (webpackEnv) {
         PnpWebpackPlugin.moduleLoader(module),
       ],
     },
+    // 创建模块时，匹配请求的规则数组。这些规则能够修改模块的创建方式。
+    // 这些规则能够对模块(module)应用 loader，或者修改解析器(parser)。
     module: {
       strictExportPresence: true,
       rules: [
         // Disable require.ensure as it's not a standard language feature.
-        { parser: { requireEnsure: false } },
+        // parser: 可以更细粒度的配置哪些模块语法要解析哪些不解析
+        { parser: { requireEnsure: false } }, // 禁用 require.ensure; 现在取而代之的是 import
         {
           // "oneOf" will traverse all following loaders until one will
           // match the requirements. When no loader matches it will fall
           // back to the "file" loader at the end of the loader list.
+          // 当规则匹配时，只使用第一个匹配规则。
           oneOf: [
             // TODO: Merge this config once `image/avif` is in the mime-db
             // https://github.com/jshttp/mime-db
@@ -460,6 +467,34 @@ module.exports = function (webpackEnv) {
                 inputSourceMap: shouldUseSourceMap,
               },
             },
+
+            {
+                test: lessRegex,
+                exclude: lessModuleRegex,
+                use: getStyleLoaders({
+                    importLoaders: 2,
+                    sourceMap: isEnvProduction && shouldUseSourceMap,
+                    },
+                    'less-loader'
+                ),
+                // Don't consider CSS imports dead code even if the
+                // containing package claims to have no side effects.
+                // Remove this when webpack adds a warning or an error for this.
+                // See https://github.com/webpack/webpack/issues/6571
+                sideEffects: true,
+            },
+            // Adds support for CSS Modules, but using SASS
+            // using the extension .module.scss or .module.sass
+            {
+            test: lessModuleRegex,
+            use: getStyleLoaders({
+                    importLoaders: 2,
+                    sourceMap: isEnvProduction && shouldUseSourceMap,
+                    modules: true,
+                    getLocalIdent: getCSSModuleLocalIdent,
+                },
+                'less-loader'
+            )},
             // "postcss" loader applies autoprefixer to our CSS.
             // "css" loader resolves paths in CSS and adds assets as dependencies.
             // "style" loader turns CSS into JS modules that inject <style> tags.
