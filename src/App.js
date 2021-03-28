@@ -1,18 +1,48 @@
-import Counter from './components/counter/index';
-import Fncompomemt from './components/fnComponent/Fncomponent';
+// eslint-disable-next-line no-unused-vars
+import Fncompomemt from './pages/fnComponent/Fncomponent';
 import './style.css';
-import { Button } from 'antd';
 import 'antd/dist/antd.css';
+import Goods from "./pages/goods";
+import "./App.less";
+import {Link, Route, Redirect} from 'react-router-dom';
+import MyNavLink from './components/MyNavLink';
+import Router from './pages/router';
 
 function App() {
-    const student = {name: '小明',age: 12, sex: '男'}
     return (
 		<div className="App">
-            <Button type="primary">Primary Button</Button>
+            
             {/* 函数式组件 */}
-			<Fncompomemt />
+			{/* <Fncompomemt /> */}
+
             {/* 类式组件 */}
-			<Counter count={2} {...student} />
+			{/* <Counter count={2} {...student} />
+            <Goods></Goods> */}
+
+            <div className="header">
+                <h3 className="h3">
+                    我的react 学习demo...
+                </h3>
+            </div>
+            <div className="content">
+                <div className="router">
+					{/* 在React中靠路由链接实现切换组件--编写路由链接 */}
+					{/* <Link className="Link-item" to="/goods">商品列表</Link>
+                    <Link className="Link-item" to="/function">函数式组件</Link> */}
+
+                    {/* 在React中靠路由链接实现切换组件--编写路由链接, 使用anvlink 可以设置动态路由的样式 */}
+                    <MyNavLink to="/router">路由组件</MyNavLink>
+                    <MyNavLink to="/goods">商品列表</MyNavLink>
+                    <MyNavLink to="/function">函数式组件</MyNavLink>
+                </div>
+                <div className="wrap">
+                    {/* 注册路由 */}
+                    <Route path="/function" component={Fncompomemt}/>
+                    <Route path="/goods" component={Goods}/>
+                    <Route path="/router" component={Router}/>
+					<Redirect to="/function"/>
+                </div>
+            </div>
 		</div>
 	)
 }

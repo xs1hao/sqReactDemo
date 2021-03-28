@@ -5,8 +5,8 @@ import './counter.less';
 export default class Counter extends Component {
     constructor(props){
         super(props);
-        console.log(this);
-        console.log(this.props);
+        // console.log('counter:',this);
+        // console.log(this.props);
         this.count = this.props.count; 
     }
     state = {res: 0};
@@ -28,7 +28,7 @@ export default class Counter extends Component {
                 <div className="result">
                     计算的结果为：{res}
                     <br/>
-                    另一种取值方式 {this.state.res}
+                    另一种取值方式: {this.state.res}
                 </div>
                 <Button type="primary" onClick={this.addCount(res)}>点我加</Button>
                 <Button type="primary" onClick={this.decreaseCount}>点我减</Button>
