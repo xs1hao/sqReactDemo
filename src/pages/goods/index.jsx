@@ -49,7 +49,9 @@ export default class Goods extends Component {
     }
 
     render() {
-        // console.log('goods',this);
+        console.log('state',this.props);
+        const {state} = this.props.location;
+        console.log('goods--state:',state); // 函数式路由导航，参数可以不展示在 url 里面；
         return (
             <div>
                 <h3 className="h3">

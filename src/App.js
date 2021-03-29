@@ -4,6 +4,8 @@ import './style.css';
 import 'antd/dist/antd.css';
 import Goods from "./pages/goods";
 import "./App.less";
+import Header from './pages/header'
+// eslint-disable-next-line no-unused-vars
 import {Link, Route, Redirect} from 'react-router-dom';
 import MyNavLink from './components/MyNavLink';
 import Router from './pages/router';
@@ -18,12 +20,7 @@ function App() {
             {/* 类式组件 */}
 			{/* <Counter count={2} {...student} />
             <Goods></Goods> */}
-
-            <div className="header">
-                <h3 className="h3">
-                    我的react 学习demo...
-                </h3>
-            </div>
+            <Header></Header>
             <div className="content">
                 <div className="router">
 					{/* 在React中靠路由链接实现切换组件--编写路由链接 */}
