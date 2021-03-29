@@ -9,17 +9,12 @@ import Header from './pages/header'
 import {Link, Route, Redirect} from 'react-router-dom';
 import MyNavLink from './components/MyNavLink';
 import Router from './pages/router';
+import Counter from './pages/counter';
 
 function App() {
     return (
 		<div className="App">
             
-            {/* 函数式组件 */}
-			{/* <Fncompomemt /> */}
-
-            {/* 类式组件 */}
-			{/* <Counter count={2} {...student} />
-            <Goods></Goods> */}
             <Header></Header>
             <div className="content">
                 <div className="router">
@@ -30,12 +25,14 @@ function App() {
                     {/* 在React中靠路由链接实现切换组件--编写路由链接, 使用anvlink 可以设置动态路由的样式 */}
                     <MyNavLink to="/router">路由组件</MyNavLink>
                     <MyNavLink to="/goods">商品列表</MyNavLink>
+                    <MyNavLink to="/redux">Redux</MyNavLink>
                     <MyNavLink to="/function">函数式组件</MyNavLink>
                 </div>
                 <div className="wrap">
                     {/* 注册路由 */}
                     <Route path="/function" component={Fncompomemt}/>
                     <Route path="/goods" component={Goods}/>
+                    <Route path="/redux" component={Counter}/>
                     <Route path="/router" component={Router}/>
 					<Redirect to="/function"/>
                 </div>
