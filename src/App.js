@@ -1,20 +1,29 @@
 // eslint-disable-next-line no-unused-vars
+import {lazy,Suspense} from 'react'
+// eslint-disable-next-line no-unused-vars
 import Fncompomemt from './pages/fnComponent/Fncomponent';
 import './style.css';
 import 'antd/dist/antd.css';
-import Goods from "./pages/goods";
 import "./App.less";
 import Header from './pages/header'
 // eslint-disable-next-line no-unused-vars
 import {Link, Route, Redirect} from 'react-router-dom';
 import MyNavLink from './components/MyNavLink';
-import Router from './pages/router';
-import Counter from './pages/counter';
+import Loading from './components/loading';
+
+// 使用懒加载
+// import GoodsListComponent from "./pages/goods";
+// import CounterComponent from './pages/router';
+// import RouterComponent from './pages/counter';
+
+// lazy 必须要和 Suspense 一起使用，不然就会编译报错。
+const GoodsListComponent = lazy(() => import('./pages/goods'));
+const CounterComponent = lazy(() => import('./pages/counter'));
+const RouterComponent = lazy(() => import('./pages/router'));
 
 function App() {
     return (
 		<div className="App">
-            
             <Header></Header>
             <div className="content">
                 <div className="router">
@@ -29,12 +38,14 @@ function App() {
                     <MyNavLink to="/function">函数式组件</MyNavLink>
                 </div>
                 <div className="wrap">
-                    {/* 注册路由 */}
-                    <Route path="/function" component={Fncompomemt}/>
-                    <Route path="/goods" component={Goods}/>
-                    <Route path="/redux" component={Counter}/>
-                    <Route path="/router" component={Router}/>
-					<Redirect to="/function"/>
+                    <Suspense fallback={<Loading/>}>
+                        {/* 注册路由 */}
+                        <Route path="/function" component={Fncompomemt}/>
+                        <Route path="/goods" component={GoodsListComponent}/>
+                        <Route path="/redux" component={CounterComponent}/>
+                        <Route path="/router" component={RouterComponent}/>
+                        <Redirect to="/function"/>
+                    </Suspense>
                 </div>
             </div>
 		</div>
