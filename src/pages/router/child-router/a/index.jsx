@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 export default class Acomponent extends Component {
     render() {
-        console.log('组件a...:',this.props);
         const {id,title} = this.props.match.params
         return (
             <div>

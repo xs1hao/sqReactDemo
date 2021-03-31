@@ -13,12 +13,12 @@ export default function Fncompomemt() {
      * 它跟 class 组件中的 componentDidMount、componentDidUpdate 和 componentWillUnmount 具有相同的用途;
      * **/
 	React.useEffect(()=>{
-		let timer = setInterval(()=>{
-			setCount(count => count+1 )
-		},1000)
-		return ()=>{
-			clearInterval(timer)
-		}
+		// let timer = setInterval(()=>{
+		// 	setCount(count => count+1 )
+		// },1000)
+		// return ()=>{
+		// 	clearInterval(timer)
+		// }
 	},[])
 
 	//加的回调

@@ -29,3 +29,6 @@
     require：运行时加载
     import：编译时加载（效率更高）【由于是编译时加载，所以import命令会提升到整个模块的头部】
 ## react-Redux 
+
+## react的高级用法：
+    1、contenxt 提供了一个无需为每层组件手动添加 props，就能在组件树间进行数据传递的方法。

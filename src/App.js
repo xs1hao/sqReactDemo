@@ -10,6 +10,7 @@ import Header from './pages/header'
 import {Link, Route, Redirect} from 'react-router-dom';
 import MyNavLink from './components/MyNavLink';
 import Loading from './components/loading';
+import Basic from './pages/basic';
 
 // 使用懒加载
 // import GoodsListComponent from "./pages/goods";
@@ -32,6 +33,7 @@ function App() {
                     <Link className="Link-item" to="/function">函数式组件</Link> */}
 
                     {/* 在React中靠路由链接实现切换组件--编写路由链接, 使用anvlink 可以设置动态路由的样式 */}
+                    <MyNavLink to="/basic">基础</MyNavLink>
                     <MyNavLink to="/router">路由组件</MyNavLink>
                     <MyNavLink to="/goods">商品列表</MyNavLink>
                     <MyNavLink to="/redux">Redux</MyNavLink>
@@ -40,6 +42,7 @@ function App() {
                 <div className="wrap">
                     <Suspense fallback={<Loading/>}>
                         {/* 注册路由 */}
+                        <Route path="/basic" component={Basic}/>
                         <Route path="/function" component={Fncompomemt}/>
                         <Route path="/goods" component={GoodsListComponent}/>
                         <Route path="/redux" component={CounterComponent}/>
