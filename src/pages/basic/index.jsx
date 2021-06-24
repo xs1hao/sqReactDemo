@@ -3,6 +3,7 @@ import BasicaComponent from './basicA';
 import BasicbComponent from './basicB';
 
 const ThemeContext = React.createContext('pink');
+
 class Basic extends Component {
 
     componentDidMount() {
@@ -16,7 +17,7 @@ class Basic extends Component {
     render() {
         return (
             <ThemeContext.Provider value={'dark'}>
-                 <BasicaComponent></BasicaComponent>
+                <BasicaComponent></BasicaComponent>
                 <BasicbComponent></BasicbComponent>
             </ThemeContext.Provider>
             // <div>

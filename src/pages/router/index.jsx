@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import MyNavLink from '../../components/MyNavLink'
-import {Route,Switch,Redirect} from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import Acomponent from './child-router/a'
 import Bcomponent from './child-router/b'
 import './router.less';

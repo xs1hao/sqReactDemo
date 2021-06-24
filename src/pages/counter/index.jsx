@@ -35,7 +35,7 @@ class Counter extends Component {
         )
     }
 }
-//使用connect()()创建并暴露一个Count的容器组件; 参数是 action 
+// 使用connect()()创建并暴露一个Count的容器组件; 参数是 action 
 export default connect(
 	state => ({
 		count:state.count
